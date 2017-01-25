@@ -14,6 +14,23 @@ RUN cd /tmp/ && \
     rm jce_policy-8.zip && \
     yes |cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/java/default/jre/lib/security/
 
+ENV JAVA_HOME /usr/java/default
+
+#Maven
+ENV MAVEN_VERSION 3.3.9
+ENV MAVEN_URL http://ftp.halifax.rwth-aachen.de
+ENV MAVEN_PKG ${MAVEN_URL}/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+ENV MAVEN_HOME /opt/apache-maven-${MAVEN_VERSION}
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${MAVEN_HOME}/bin
+
+WORKDIR /opt
+
+RUN curl ${MAVEN_PKG} | tar xz
+
+# mount point
+RUN mkdir /source
+VOLUME /source
+WORKDIR /source
 # clean all cache to clean space
 # TODO enable me
 # RUN yum clean all
