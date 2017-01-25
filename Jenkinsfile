@@ -1,10 +1,10 @@
-name = "jenkins-slave-docker-cloudhub"
+name = "cloudhub-buildbox"
 node {
     stage('Build Image') {
         checkout scm
         sh "ls -l"
         sh "pwd"
-        docker.build 'jenkins-slave-docker-cloudhub'
+        docker.build 'quay.dev.build.msap.io/vromero/${name}'
     }
     stage('Upload Image') {}
 }
