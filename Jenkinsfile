@@ -1,10 +1,11 @@
-name = "cloudhub-buildbox"
+import groovy.transform.Field
+@Field name = "cloudhub-buildbox"
 node {
     stage('Build Image') {
         checkout scm
         sh "ls -l"
         sh "pwd"
-        docker.build 'quay.dev.build.msap.io/vromero/${name}'
+        docker.build "quay.dev.build.msap.io/vromero/${name}"
     }
     stage('Upload Image') {}
 }
