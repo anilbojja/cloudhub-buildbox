@@ -28,8 +28,12 @@ WORKDIR /opt
 RUN curl ${MAVEN_PKG} | tar xz
 
 # mount point
-RUN mkdir /source
-VOLUME /source
+RUN mkdir -p {/source,/config}
+VOLUME  ["/source","/config"]
+
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 WORKDIR /source
 # clean all cache to clean space
 # TODO enable me
